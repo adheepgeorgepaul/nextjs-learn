@@ -33,11 +33,19 @@ The easiest way to deploy your Next.js app is to use the [Vercel Platform](https
 
 Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
 
-
 1. create tsconfig.json
 2. npm i typescript @types/node @types/react --save-dev (since we don't need it in production)
 3. next-dev is magic, it fixes all the errors
 4. whatever is inside public folder is accessible from the root domain
 5. Routing is linked with file structure
-6. Create pages/_document.tsx and export your custom document, write this one as a class based component 
-
+6. Create pages/\_document.tsx and export your custom document, write this one as a class based component
+7. \_app.tsx is responsible for rendering all your pages
+8. The function that you export out of \_app.tsx is executing on the server-side as well as on the client side ( try writing console logging here, you will get the message on your terminal)
+9. \_document.tsx is only rendered on the server, it won't execute any javascript written there on the client-side. It creates the overall structure of the page
+10. You could use Styled-JSX(limited to the component where you wrote it) to write css in jsx (not recommended)
+11. nextjs way of importing styles to pages other than \_app.tsx is to name the css file as
+    eg: tsx file -> index.tsx
+    css file-> index.module.css
+    import styles from 'index.module.css'
+    There's a way to do it without using styles object but nextjs doesn't provide that natively
+12. Install scss -> npm i sass --save-dev
