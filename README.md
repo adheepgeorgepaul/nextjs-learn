@@ -49,3 +49,26 @@ Check out our [Next.js deployment documentation](https://nextjs.org/docs/deploym
     import styles from 'index.module.css'
     There's a way to do it without using styles object but nextjs doesn't provide that natively
 12. Install scss -> npm i sass --save-dev
+13. npm i @types/jsonwebtoken --save-dev
+14. jwt.io can be used to decode jsonwebtokens
+15. Routing <a href""/> reloads page, instead use Link from next/link - better for SEO, accesibilty
+16. Nested Routes
+17. [Dynamic] routes
+18. useRouter() hook - doesn't work sometimes if there are no prefetching conditions like getStaticProps or getServerSideProps
+19. programmatic navigation: router.replace("/") / router.push("/")
+20. Avoid deep nesting for a route with many subpaths
+    [...fileName.tsx]
+21. Catch all routes without writing an index file [[...fileName.tsx]]
+22. getStaticProps(execution on server, i.e runs at build time, all getStaticProps function are run and their results are stored in the file system): async function, returns {props: {myName: Akash}} - the returned value is injected into the page in which it is defined
+23. {props: {myName: Akash}, revalidate: 10}, revalidate parameter is useful in production, since it runs static props for a particular page after 10 seconds, as specified here
+24. [dynamic] page also requires you to define getStaticPaths function along with getStaticProps
+25. getStaticPaths:
+    Async function - path Array, fallback
+    returns {path:[{params: {name: 'hello'}}, {params: {name: 'hi'}}], fallback: true}
+
+    1. if fallback = true, upon accessing a route which isn't part of the path array, getStaticProps will be called on server during run time and the dynamic route gets added to the path array, inorder to prevent getStaticProps from being called the next time
+       Use router.fallback to show a loading indicator since Nextjs loads page with empty props (getStaticProps call is delayed in this case)
+    2. if fallback = false, For any route other than those present in the path array, you will be re-directed to the 404 page
+26. getServerSideProps: called always on every page request, even on production
+    * Useful when you want a real-time dashboard or time-sensitive pages
+    * Try not to use it unless you absolutely need it
